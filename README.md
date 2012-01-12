@@ -7,22 +7,22 @@ O SoSMS permite que você mande mensagens SMS para vários destinatários ao mes
 Para usar a biblioteca você deverá copiar o projeto php-sosms dentro de sua aplicação PHP e importar as classes conforme o exemplo abaixo:
 
 ```php
-	<?php
-		require_once 'php-sosms/src/SoSMS/Client.php';
-		require_once 'php-sosms/src/SoSMS/Configuration.php';
-	?>
+<?php
+	require_once 'php-sosms/src/SoSMS/Client.php';
+	require_once 'php-sosms/src/SoSMS/Configuration.php';
+?>
 ```
 
 Após importar as classe como mostrado acima você deverá configurar a biblioteca adicionando sua chave secreta para o SoSMS, conforme o exemplo abaixo:
 
 ```php
-	<?php
-		require_once 'php-sosms/src/SoSMS/Client.php';
-		require_once 'php-sosms/src/SoSMS/Configuration.php';
+<?php
+	require_once 'php-sosms/src/SoSMS/Client.php';
+	require_once 'php-sosms/src/SoSMS/Configuration.php';
 
-		$config = new SoSMS\Configuration('123456');
-		$client = new SoSMS\Client($config);
-	?>
+	$config = new SoSMS\Configuration('123456');
+	$client = new SoSMS\Client($config);
+?>
 ```
 
 Para resgatar o seu código de segurança [acesse sua conta](http://sosms.com.br/usuarios/acessar) e verifique sua chave secreta na página da [documentação](http://sosms.com.br/pagina/documentacao#chave).
@@ -38,9 +38,9 @@ O SoSMS permite o envio de uma mesma mensagem para vários destinatários ao mes
 Para isto você deverá utilizar o método sendMessage da classe SoSMS\Client conforme o exemplo abaixo:
 
 ```php
-	<?php
-		$message = $client->sendMessage("Bem Vindo!", "Maria:1187965545,Luana:8189965474,Francisco:8388496535");
-	?>
+<?php
+	$message = $client->sendMessage("Bem Vindo!", "Maria:1187965545,Luana:8189965474,Francisco:8388496535");
+?>
 ```
 
 O primeiro parâmetro é o texto da mensagem a ser enviado. Este deve conter no máximo 140 caracteres. Já o segundo parâmetro é um array de strings contendo os dados dos destinatários.
@@ -57,22 +57,22 @@ No exemplo acima será enviada uma mensagem com o texto "Bem Vindo!" para três 
 Este método retorna um objeto do tipo SoSMS\Message que possui as seguintes características:
 
 ```php
-	<?php
-		$message->id // O identificador da mensagem
-		$message->text // A mensagem enviada aos destinatários
-		$message->dispaches // Uma lista com os envios para cada destinatário, do tipo SoSMSMessageDispach
-	?>
+<?php
+	$message->id // O identificador da mensagem
+	$message->text // A mensagem enviada aos destinatários
+	$message->dispaches // Uma lista com os envios para cada destinatário, do tipo SoSMSMessageDispach
+?>
 ```
 
 Cada dispach (SoSMS\MessageDispach) possui as seguintes características:
 
 ```php
-	<?php
-		foreach($message->dispaches as $messageDispach) {
-			$messageDispach->phoneNumber // O número do telefone do destinatário no formato "(99) 9999-9999"
-			$messageDispach->status // O status da entrega da mensagem para o destinatário
-		}
-	?>
+<?php
+	foreach($message->dispaches as $messageDispach) {
+		$messageDispach->phoneNumber // O número do telefone do destinatário no formato "(99) 9999-9999"
+		$messageDispach->status // O status da entrega da mensagem para o destinatário
+	}
+?>
 ```
 
 Para mais informações sobre os possíveis status de retorno verifique a [documentação](http://sosms.com.br/pagina/documentacao#resposta).
@@ -80,9 +80,9 @@ Para mais informações sobre os possíveis status de retorno verifique a [docum
 ### Resgatando o status de uma mensagem
 
 ```php
-	<?php
-		$message = $client->getMessage(1002);
-	?>
+<?php
+	$message = $client->getMessage(1002);
+?>
 ```
 
 Este método retorna um objeto do tipo SoSMS\Message descrito acima.
@@ -92,9 +92,9 @@ Este método retorna um objeto do tipo SoSMS\Message descrito acima.
 Para saber qual o saldo atual da sua conta você pode usar o seguinte código:
 
 ```php
-	<?php
-		$client->getBalance().value;
-	?>
+<?php
+	$client->getBalance().value;
+?>
 ```
 
 Este código retorna um valor inteiro com o saldo atual da sua conta.
@@ -104,19 +104,19 @@ Este código retorna um valor inteiro com o saldo atual da sua conta.
 Caso o serviço do SoSMS retorne alguma mensagem de erro será lançada uma exceção do tipo SoSMS\Exception, conforme o exemplo abaixo:
 
 ```php
-	<?php
-		require_once 'php-sosms/src/SoSMS/Client.php';
-		require_once 'php-sosms/src/SoSMS/Configuration.php';
+<?php
+	require_once 'php-sosms/src/SoSMS/Client.php';
+	require_once 'php-sosms/src/SoSMS/Configuration.php';
 
-		$config = new SoSMS\Configuration('Chave não existente');
-		$client = new SoSMS\Client($config);
+	$config = new SoSMS\Configuration('Chave não existente');
+	$client = new SoSMS\Client($config);
 
-		try {
-			$client->getBalance(); // Vai lançar um erro pois a chave secreta não é válida
-		} catch(SoSMS\Exception $ex) {
-			echo $ex->getMessage();
-		}
-	?>
+	try {
+		$client->getBalance(); // Vai lançar um erro pois a chave secreta não é válida
+	} catch(SoSMS\Exception $ex) {
+		echo $ex->getMessage();
+	}
+?>
 ```
 
 ## Documentação oficial
