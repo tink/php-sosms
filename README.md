@@ -1,6 +1,7 @@
 # php-sosms
 
 php-sosms é uma biblioteca PHP para acessar os serviços de envio de mensagens em massa do [SoSMS](http://sosms.com.br) da [tink!](http://tink.com.br).
+
 O SoSMS permite que você mande mensagens SMS para vários destinatários ao mesmo tempo, permitindo você saber o status de cada mensagem enviada com detalhes.
 
 ## Utilização
@@ -46,6 +47,7 @@ Para isto você deverá utilizar o método sendMessage da classe SoSMS\Client co
 O primeiro parâmetro é o texto da mensagem a ser enviado. Este deve conter no máximo 140 caracteres. Já o segundo parâmetro é um array de strings contendo os dados dos destinatários.
 Cada destinatário deve possuir um nome e um número de telefone que devem ser separados pelo caractere de dois pontos (:).
 Os números de telefone deverão possuir DDD e o número, totalizando 10 caracteres.
+
 Caso haja mais de um destinatário, os mesmos devem ser separados por vírgula (,).
 
 No exemplo acima será enviada uma mensagem com o texto "Bem Vindo!" para três destinatários:
