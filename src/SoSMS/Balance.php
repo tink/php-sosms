@@ -1,6 +1,7 @@
 <?php
 namespace SoSMS;
 use SimpleXMLElement;
+use SoSMS\Exception as SoSMSException;
 
 /**
  * SoSMS balance class.
@@ -19,7 +20,11 @@ class Balance extends Record
         $target = (isset($this)) ? $this : new Balance();
 
         $xml = new SimpleXMLElement($xml);
-        $target->value = $xml->value[0];
+        if($xml->error) {
+            throw new SoSMSException($xml);
+        } else {
+            $target->value = $xml->value[0];
+        }
 
         return $target;
     }
