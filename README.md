@@ -21,7 +21,7 @@ Após importar as classe como mostrado acima você deverá configurar a bibliote
 	require_once 'php-sosms/src/SoSMS/Client.php';
 	require_once 'php-sosms/src/SoSMS/Configuration.php';
 
-	$config = new SoSMS\Configuration('123456');
+	$config = new SoSMS\Configuration('ChaveSecreta');
 	$client = new SoSMS\Client($config);
 ?>
 ```
